@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Unidad 3 · Ganadería Sostenible</title>
+    <title>Unidad 4 · Huertos Familiares y Semillas</title>
     <!-- Swiper CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
     <style>
-        /* ---------- RESET + VARIABLES ---------- */
+        /* ---------- RESET + VARIABLES (colores solicitados) ---------- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --verde-principal: #2E7D32;
-            --verde-claro: #66BB6A;
-            --verde-muy-claro: #E8F5E9;
-            --marron-tierra: #8D6E63;
+            --color-principal: #9B59B6;
+            --color-oscuro: #6C3483;
+            --color-claro: #D7BDE2;
+            --color-muy-claro: #F4ECF7;
             --beige: #F5F5DC;
             --blanco: #FFFFFF;
             --gris-oscuro: #424242;
+            --gris-claro: #555;
             --amarillo-suave: #FBC02D;
             --font: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
         }
@@ -74,7 +75,7 @@
             animation: fadeUp 0.8s ease;
         }
         .splash-btn {
-            background: var(--verde-principal);
+            background: var(--color-principal);
             color: var(--blanco);
             border: none;
             border-radius: 60px;
@@ -87,7 +88,7 @@
             animation: pulse 1.8s infinite;
             letter-spacing: 1px;
         }
-        .splash-btn:hover { background: #1B5E20; }
+        .splash-btn:hover { background: #7D3C98; }
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.06); }
@@ -103,7 +104,7 @@
             top: 18px;
             right: 20px;
             z-index: 8000;
-            background: var(--verde-principal);
+            background: var(--color-principal);
             color: white;
             border: none;
             border-radius: 40px;
@@ -115,7 +116,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             transition: background 0.2s;
         }
-        .close-btn:hover { background: #1B5E20; }
+        .close-btn:hover { background: #7D3C98; }
 
         /* ---------- BARRA DE PROGRESO ---------- */
         .progress-bar {
@@ -130,7 +131,7 @@
         .progress-fill {
             height: 100%;
             width: 0%;
-            background: var(--verde-principal);
+            background: var(--color-principal);
             transition: width 0.3s ease;
         }
 
@@ -152,25 +153,25 @@
             scroll-behavior: smooth;
         }
         .swiper-slide:nth-child(odd) { background: var(--beige); }
-        .swiper-slide:nth-child(even) { background: var(--verde-muy-claro); }
+        .swiper-slide:nth-child(even) { background: var(--color-muy-claro); }
         .swiper-slide:nth-child(3n) { background: var(--blanco); }
 
         /* tipografía */
         .swiper-slide h1 {
-            color: var(--verde-principal);
+            color: var(--color-oscuro);
             font-size: 2.6rem;
-            border-bottom: 4px solid var(--amarillo-suave);
+            border-bottom: 4px solid var(--color-principal);
             display: inline-block;
             padding-bottom: 8px;
             margin-bottom: 20px;
         }
         .swiper-slide h2 {
-            color: var(--marron-tierra);
+            color: var(--color-oscuro);
             font-size: 2rem;
             margin: 15px 0 10px;
         }
         .swiper-slide h3 {
-            color: var(--verde-principal);
+            color: var(--color-oscuro);
             font-size: 1.5rem;
             margin-top: 10px;
         }
@@ -185,7 +186,7 @@
         }
         .swiper-slide li { margin-bottom: 8px; }
         .highlight-box {
-            background: var(--amarillo-suave);
+            background: var(--color-claro);
             padding: 20px 24px;
             border-radius: 12px;
             font-weight: 600;
@@ -203,7 +204,7 @@
             background: white;
             padding: 20px;
             border-radius: 12px;
-            border-top: 6px solid var(--verde-claro);
+            border-top: 6px solid var(--color-principal);
             box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
@@ -241,15 +242,43 @@
         .card.flipped .card-back {
             display: flex;
         }
-        .card h3 { color: var(--marron-tierra); }
+        .card h3 { color: var(--color-oscuro); }
         .card p { font-size: 1rem; }
         .card small { color: var(--gris-oscuro); opacity: 0.7; }
-        .profesor {
-            margin-top: auto;
-            font-style: italic;
-            color: var(--marron-tierra);
-            font-size: 1.2rem;
+
+        /* Estilo para el bloque de presentación del tema */
+        .tema-block {
+            margin: 28px 0;
+            padding: 18px 0;
+            border-top: 3px solid var(--color-principal);
+            border-bottom: 3px solid var(--color-principal);
+            text-align: center;
         }
+        .tema-block .etiqueta {
+            display: inline-block;
+            background: var(--color-principal);
+            color: #ffffff;
+            padding: 5px 16px;
+            border-radius: 18px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .tema-block h3 {
+            margin: 0;
+            color: var(--color-oscuro);
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .tema-block p {
+            margin: 16px auto 0;
+            max-width: 760px;
+            color: var(--gris-claro);
+            font-size: 16px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
         .col-2 {
             column-count: 2;
             column-gap: 30px;
@@ -281,7 +310,7 @@
             pointer-events: auto;
         }
         .nav-btn {
-            background: var(--verde-principal);
+            background: var(--color-principal);
             color: white;
             border: none;
             border-radius: 50px;
@@ -292,7 +321,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transition: background 0.2s;
         }
-        .nav-btn:hover { background: #1B5E20; }
+        .nav-btn:hover { background: #7D3C98; }
         .nav-btn.hidden-btn {
             opacity: 0;
             pointer-events: none;
@@ -348,7 +377,7 @@
         }
         .lightbox-close:hover { background: rgba(255,255,255,0.15); }
 
-        /* ---------- AUTOEVALUACIÓN (3 preguntas de selección única) ---------- */
+        /* ---------- AUTOEVALUACIÓN ---------- */
         .quiz-container {
             background: white;
             padding: 30px;
@@ -383,7 +412,7 @@
         .quiz-result {
             margin-top: 25px;
             padding: 20px;
-            background: var(--verde-muy-claro);
+            background: var(--color-muy-claro);
             border-radius: 12px;
             text-align: center;
             font-size: 1.3rem;
@@ -395,7 +424,7 @@
             animation: fadeUp 0.5s ease;
         }
         .quiz-btn {
-            background: var(--verde-principal);
+            background: var(--color-principal);
             color: white;
             border: none;
             border-radius: 50px;
@@ -406,7 +435,7 @@
             transition: background 0.2s;
             margin-top: 15px;
         }
-        .quiz-btn:hover { background: #1B5E20; }
+        .quiz-btn:hover { background: #7D3C98; }
 
         /* ---------- IMAGEN CLICKEABLE ---------- */
         .clickable-img {
@@ -426,7 +455,6 @@
         .text-center { text-align: center; }
         .mt-20 { margin-top: 20px; }
         .mb-20 { margin-bottom: 20px; }
-        .bg-verde-claro { background: var(--verde-muy-claro); }
     </style>
 </head>
 <body>
@@ -449,64 +477,46 @@
     <!-- SWIPER -->
     <div class="swiper" id="swiperContainer">
         <div class="swiper-wrapper">
-            <!-- SLIDE 1: Portada -->
+            <!-- SLIDE 1: Portada Unidad 4 -->
             <div class="swiper-slide">
-                <h1>Unidad 3</h1>
-                <h2>Ganadería sostenible</h2>
+                <h1>Unidad 4</h1>
+                <h2>Huertos familiares y manejo y conservación de semillas</h2>
                 <div class="highlight-box">
-                    La ganadería puede ser una actividad que cuida el ambiente. Veremos cómo integrar árboles en nuestros potreros y mantener nuestros animales sanos.
+                    Un huerto en casa es la base de la seguridad alimentaria. Aquí aprenderemos a diseñarlo y a cuidar nuestras semillas, que son el tesoro de nuestras familias.
                 </div>
             </div>
 
-            <!-- SLIDE 2: Tema 1 - Ganadería sostenible -->
+            <!-- SLIDE 2: Tema 1 - Huertos familiares -->
             <div class="swiper-slide">
-                <h2>Tema 1: Ganadería sostenible</h2>
-                <p>La ganadería sostenible busca producir leche y carne de manera rentable sin dañar el medio ambiente. Implica:</p>
+                <div class="tema-block">
+                    <span class="etiqueta">TEMA 1</span>
+                    <h3>Huertos familiares y la nutrición de la familia</h3>
+                    <p>Un huerto familiar es un espacio para producir alimentos saludables en poco terreno. A continuación, te mostramos cómo establecerlo y diversificarlo.</p>
+                </div>
                 <div class="card-grid">
                     <div class="card" onclick="flipCard(this)">
                         <div class="card-inner">
                             <div class="card-front">
-                                <h3>🌾 Manejo racional de pastos</h3>
-                                <p>Rotar el ganado en potreros pequeños para darle tiempo al pasto de recuperarse.</p>
+                                <h3>🌱 ¿Cómo hacerlo?</h3>
+                                <p>Elige un lugar con buen sol cerca de tu casa.</p>
                                 <p><small>👆 Haz clic para más info</small></p>
                             </div>
                             <div class="card-back">
-                                <h3>🌾 Manejo racional de pastos</h3>
-                                <p>Así se evita la sobrecarga y se mejora la calidad del forraje. La rotación permite que el pasto crezca fuerte y nutritivo, aumentando la producción de leche y carne.</p>
+                                <h3>🌱 ¿Cómo hacerlo?</h3>
+                                <p>Prepara camas elevadas (de 1 metro de ancho por el largo que quieras) para facilitar el manejo. Mejora el suelo con abono orgánico y compost.</p>
                             </div>
                         </div>
                     </div>
                     <div class="card" onclick="flipCard(this)">
                         <div class="card-inner">
                             <div class="card-front">
-                                <h3>💧 Abastecimiento de agua</h3>
-                                <p>Asegurar que el ganado tenga agua limpia y fresca en todo momento.</p>
+                                <h3>🌿 ¿Qué sembrar?</h3>
+                                <p>Hortalizas, hierbas y frutales para el hogar.</p>
                                 <p><small>👆 Haz clic para más info</small></p>
                             </div>
                             <div class="card-back">
-                                <h3>💧 Abastecimiento de agua</h3>
-                                <p>Protege las fuentes de agua con cercas y vegetación nativa. El agua de calidad es esencial para la producción y salud animal.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SLIDE 3: Tema 2 - Agroforestería -->
-            <div class="swiper-slide">
-                <h2>Tema 2: Integración con agroforestería</h2>
-                <p>Los Sistemas Silvopastoriles son potreros con árboles que proporcionan sombra, forraje y madera.</p>
-                <div class="card-grid">
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <h3>🌳 Diseño</h3>
-                                <p>Siembra árboles maderables y de sombra en tu potrero.</p>
-                                <p><small>👆 Haz clic para más info</small></p>
-                            </div>
-                            <div class="card-back">
-                                <h3>🌳 Diseño</h3>
-                                <p>Especies: cedro, madero negro, laurel negro, madreado, cedro real, guácimo. Deja distancia amplia entre árboles para que no interfieran con el pasto.</p>
+                                <h3>🌿 ¿Qué sembrar?</h3>
+                                <p>En zona centro y oriente de Honduras: chile, tomate, ayote, cebolla, culantro, rábano, lechuga, elotes, pataste, yuca, malanga, habichuelas, hierbas aromáticas (menta, hierbabuena), plantas medicinales (sábila, apazote, pericón) y frutales como mangos, aguacates, bananos, cocos, ciruelas, marañones, nances, limones, naranjas.</p>
                             </div>
                         </div>
                     </div>
@@ -514,170 +524,120 @@
                         <div class="card-inner">
                             <div class="card-front">
                                 <h3>✅ Beneficios</h3>
-                                <p>Sombra, forraje, madera, conservación del agua y biodiversidad.</p>
+                                <p>Alimentos frescos, ahorro y legado familiar.</p>
                                 <p><small>👆 Haz clic para más info</small></p>
                             </div>
                             <div class="card-back">
                                 <h3>✅ Beneficios</h3>
-                                <p>Reducen estrés calórico del ganado, mejoran productividad. Hojas de algunos árboles sirven como suplemento alimenticio en épocas secas. Ayudan a conservar el agua y la biodiversidad.</p>
+                                <p>Mejora la alimentación de la familia con alimentos frescos y sin químicos, reduce gastos en el mercado y nos hace brindar un legado a nuestras generaciones con frutales que producirán frutas frescas en temporadas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: Tema 2 - Conservación de semillas -->
+            <div class="swiper-slide">
+                <div class="tema-block">
+                    <span class="etiqueta">TEMA 2</span>
+                    <h3>Conservación y manejo de semillas para la alimentación de mañana</h3>
+                    <p>Las semillas locales son nuestra herencia cultural y biológica. Son las que mejor se adaptan a nuestro clima y suelos. Aprende a seleccionarlas, cosecharlas y almacenarlas correctamente.</p>
+                </div>
+                <div class="card-grid">
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>🌾 Selección</h3>
+                                <p>Elige las mejores plantas para guardar su semilla.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>🌾 Selección</h3>
+                                <p>Deben ser sanas, vigorosas y con buena producción. Para el maíz, selecciona las mazorcas más grandes y sanas de tu parcela.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>☀️ Cosecha y secado</h3>
+                                <p>Cosecha las semillas en su punto justo de madurez.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>☀️ Cosecha y secado</h3>
+                                <p>Sécalas a la sombra en un lugar ventilado para que no pierdan su poder germinativo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>📦 Almacenamiento</h3>
+                                <p>Guarda las semillas en recipientes bien cerrados.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>📦 Almacenamiento</h3>
+                                <p>Usa recipientes de vidrio o plástico. Puedes usar ceniza o cal para protegerlas de los insectos. Etiqueta con nombre, fecha y origen. Guarda en lugar fresco y seco, lejos de humedad y luz directa.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>🤝 Intercambio</h3>
+                                <p>Organiza ferias de semillas en tu comunidad.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>🤝 Intercambio</h3>
+                                <p>Intercambia variedades locales con otras compañeras. Así fortalecemos la diversidad y nuestra autonomía.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Imagen clickeable -->
                 <div style="margin-top: 20px; text-align: center;">
-                    <img class="clickable-img" src="https://www.dropbox.com/scl/fi/7qb3a3zc0qcst825vgmn3/LOGO_fondo.png?rlkey=p824fvkqusvkfkz7faj1hl73e&st=ruww9xow&dl=1" alt="Sistema silvopastoril" style="max-width: 250px; border-radius: 12px;">
-                    <p style="font-size: 0.9rem; color: var(--marron-tierra);">👆 Haz clic para ampliar</p>
+                    <img class="clickable-img" src="https://www.dropbox.com/scl/fi/7qb3a3zc0qcst825vgmn3/LOGO_fondo.png?rlkey=p824fvkqusvkfkz7faj1hl73e&st=ruww9xow&dl=1" alt="Semillas" style="max-width: 200px; border-radius: 12px;">
+                    <p style="font-size: 0.9rem; color: var(--gris-claro);">👆 Haz clic para ampliar</p>
                 </div>
             </div>
 
-            <!-- SLIDE 4: Tema 3 - Sanidad animal -->
-            <div class="swiper-slide">
-                <h2>Tema 3: Sanidad animal básica</h2>
-                <p>Un animal sano es un animal productivo. La sanidad animal es la base para evitar pérdidas económicas.</p>
-                <div class="card-grid">
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <h3>💉 Vacunación</h3>
-                                <p>Cumple con el calendario nacional de vacunación obligatoria.</p>
-                                <p><small>👆 Haz clic para más info</small></p>
-                            </div>
-                            <div class="card-back">
-                                <h3>💉 Vacunación</h3>
-                                <p>En Honduras: fiebre aftosa (2 veces/año) y rabia paralítica (1 vez/año), transmitida por murciélagos. Fundamental para prevenir pérdidas.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <h3>🪱 Desparasitación</h3>
-                                <p>Parásitos internos y externos debilitan al animal.</p>
-                                <p><small>👆 Haz clic para más info</small></p>
-                            </div>
-                            <div class="card-back">
-                                <h3>🪱 Desparasitación</h3>
-                                <p>Interna: ivermectina o albendazol cada 4 meses. Externa: baños garrapaticidas cada 15 días en lluvia. Alternativa natural: caldo sulfocalcico o plantar higuerillo.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SLIDE 5: Enfermedades comunes -->
-            <div class="swiper-slide">
-                <h2>Prevención de enfermedades comunes</h2>
-                <div class="card-grid">
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <h3>🐄 Mastitis</h3>
-                                <p>Inflamación de la ubre.</p>
-                                <p><small>👆 Haz clic para más info</small></p>
-                            </div>
-                            <div class="card-back">
-                                <h3>🐄 Mastitis</h3>
-                                <p>Mantén limpio el lugar de ordeño. Lava la ubre con agua y jabón antes y después. Usa ordeño completo y sella pezones con yodo diluido.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <h3>💨 Timpanismo</h3>
-                                <p>Hinchazón por gases.</p>
-                                <p><small>👆 Haz clic para más info</small></p>
-                            </div>
-                            <div class="card-back">
-                                <h3>💨 Timpanismo</h3>
-                                <p>Evita que el ganado coma pasto muy tierno o leguminosas húmedas. Proporciona heno o zacate seco antes de soltarlos a potreros con forraje verde.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <h3>🕷️ Parasitosis externas</h3>
-                                <p>Garrapatas y moscas.</p>
-                                <p><small>👆 Haz clic para más info</small></p>
-                            </div>
-                            <div class="card-back">
-                                <h3>🕷️ Parasitosis externas</h3>
-                                <p>Inspecciones visuales periódicas. Aplica baños garrapaticidas y aísla a los animales más afectados.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SLIDE 6: Plan de observación y registro -->
-            <div class="swiper-slide">
-                <h2>Plan de observación y registro</h2>
-                <div class="card-grid">
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <h3>👁️ Observación diaria</h3>
-                                <p>15 minutos diarios para observar tu ganado.</p>
-                                <p><small>👆 Haz clic para más info</small></p>
-                            </div>
-                            <div class="card-back">
-                                <h3>👁️ Observación diaria</h3>
-                                <p>Identifica signos de enfermedad: falta de apetito, apatía, cojeras, tos, secreción nasal, diarrea o cambios en producción de leche. Atender a tiempo evita complicaciones. Evita y cura heridas para prevenir el gusano barrenador.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" onclick="flipCard(this)">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <h3>📋 Registro sanitario</h3>
-                                <p>Lleva un cuaderno o libreta.</p>
-                                <p><small>👆 Haz clic para más info</small></p>
-                            </div>
-                            <div class="card-back">
-                                <h3>📋 Registro sanitario</h3>
-                                <p>Anota fechas de vacunación, desparasitación, partos y enfermedades. Esto te ayudará a planificar mejor el manejo del hato.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SLIDE 7: AUTOEVALUACIÓN (3 preguntas de selección única) -->
+            <!-- SLIDE 4: AUTOEVALUACIÓN (3 preguntas) -->
             <div class="swiper-slide">
                 <h2>📝 Autoevaluación</h2>
-                <p>Responde las siguientes preguntas para poner a prueba tus conocimientos sobre ganadería sostenible.</p>
+                <p>Responde las siguientes preguntas para poner a prueba tus conocimientos sobre huertos familiares y conservación de semillas.</p>
                 <div class="quiz-container" id="quizContainer">
                     <div class="quiz-question" data-correct="a">
-                        <p>1. ¿Qué busca la ganadería sostenible?</p>
+                        <p>1. ¿Qué es un huerto familiar?</p>
                         <div class="quiz-options">
-                            <label><input type="radio" name="q1" value="a"> a) Producir sin dañar el ambiente</label>
-                            <label><input type="radio" name="q1" value="b"> b) Producir solo carne</label>
-                            <label><input type="radio" name="q1" value="c"> c) Eliminar los árboles</label>
+                            <label><input type="radio" name="q1" value="a"> a) Un espacio para producir alimentos saludables en poco terreno</label>
+                            <label><input type="radio" name="q1" value="b"> b) Un lugar para cultivar solo flores</label>
+                            <label><input type="radio" name="q1" value="c"> c) Una gran extensión de tierra para monocultivo</label>
                         </div>
                     </div>
                     <div class="quiz-question" data-correct="b">
-                        <p>2. ¿Cada cuánto se debe desparasitar internamente al ganado?</p>
+                        <p>2. ¿Dónde se deben secar las semillas para conservar su poder germinativo?</p>
                         <div class="quiz-options">
-                            <label><input type="radio" name="q2" value="a"> a) Cada 2 meses</label>
-                            <label><input type="radio" name="q2" value="b"> b) Cada 4 meses</label>
-                            <label><input type="radio" name="q2" value="c"> c) Cada 6 meses</label>
+                            <label><input type="radio" name="q2" value="a"> a) Al sol directo</label>
+                            <label><input type="radio" name="q2" value="b"> b) A la sombra en un lugar ventilado</label>
+                            <label><input type="radio" name="q2" value="c"> c) En el horno</label>
                         </div>
                     </div>
-                    <div class="quiz-question" data-correct="a">
-                        <p>3. ¿Qué enfermedad se previene manteniendo limpio el lugar de ordeño?</p>
+                    <div class="quiz-question" data-correct="c">
+                        <p>3. ¿Qué se recomienda para proteger las semillas de los insectos durante el almacenamiento?</p>
                         <div class="quiz-options">
-                            <label><input type="radio" name="q3" value="a"> a) Mastitis</label>
-                            <label><input type="radio" name="q3" value="b"> b) Timpanismo</label>
-                            <label><input type="radio" name="q3" value="c"> c) Rabia</label>
+                            <label><input type="radio" name="q3" value="a"> a) Usar pesticidas químicos</label>
+                            <label><input type="radio" name="q3" value="b"> b) Guardarlas en bolsas de plástico abiertas</label>
+                            <label><input type="radio" name="q3" value="c"> c) Usar ceniza o cal</label>
                         </div>
                     </div>
                     <button class="quiz-btn" id="quizBtn">✅ Ver calificación</button>
                     <div class="quiz-result" id="quizResult">
                         <span id="quizScore"></span>
                     </div>
-                    <div class="quiz-result" id="quizRecovery" style="background: var(--amarillo-suave); margin-top: 10px;">
+                    <div class="quiz-result" id="quizRecovery" style="background: var(--color-claro); margin-top: 10px;">
                         <span id="recoveryMessage"></span>
                     </div>
                 </div>
@@ -688,7 +648,7 @@
     <!-- BARRA DE NAVEGACIÓN INFERIOR -->
     <div class="nav-bar" id="navBar">
         <button class="nav-btn" id="prevBtn">◀ Anterior</button>
-        <span class="nav-counter" id="slideCounter">1 / 7</span>
+        <span class="nav-counter" id="slideCounter">1 / 4</span>
         <button class="nav-btn" id="nextBtn">Siguiente ▶</button>
     </div>
 
@@ -727,14 +687,13 @@
 
         // ---------- SWIPER ----------
         let swiper = null;
-        let totalSlides = 7;
+        let totalSlides = 4;
 
         function updateProgress(activeIndex, total) {
             const pct = ((activeIndex + 1) / total) * 100;
             progressFill.style.width = pct + '%';
             slideCounter.textContent = (activeIndex + 1) + ' / ' + total;
             
-            // Ocultar/mostrar botones según posición
             if (activeIndex === 0) {
                 prevBtn.classList.add('hidden-btn');
             } else {
@@ -817,7 +776,7 @@
             } catch(e) {}
         }
 
-        // ---------- AUTOEVALUACIÓN (3 preguntas de selección única) ----------
+        // ---------- AUTOEVALUACIÓN ----------
         function setupQuiz() {
             const quizBtn = document.getElementById('quizBtn');
             const quizResult = document.getElementById('quizResult');
@@ -854,10 +813,10 @@
                 let recovery = '';
                 if (percentage >= 70) {
                     grade = '✅ ¡Aprobado!';
-                    recovery = '🎉 Excelente trabajo. Recuerda aplicar estos conocimientos en tu finca.';
+                    recovery = '🎉 Excelente trabajo. Recuerda aplicar estos conocimientos en tu huerto familiar.';
                 } else {
                     grade = '📚 Necesitas repasar.';
-                    recovery = '🔄 Te recomendamos revisar nuevamente los temas de ganadería sostenible, sistemas silvopastoriles y sanidad animal. ¡Tú puedes!';
+                    recovery = '🔄 Te recomendamos revisar nuevamente los temas de huertos familiares y conservación de semillas. ¡Tú puedes!';
                 }
 
                 quizResult.classList.add('show');
@@ -903,7 +862,7 @@
         startBtn.addEventListener('click', startPresentation);
         closeBtn.addEventListener('click', closePresentation);
 
-        console.log('🌱 Unidad 3 · Ganadería Sostenible');
+        console.log('🌱 Unidad 4 · Huertos Familiares y Semillas');
         console.log('📱 Dispositivo:', isMobile ? (isIPhone ? 'iPhone' : 'Android/Mobile') : 'Desktop');
     })();
 </script>
