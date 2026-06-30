@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Unidad 3 · Ganadería Sostenible</title>
+    <!-- Swiper CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <style>
+        /* ---------- RESET + VARIABLES ---------- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --verde-principal: #2E7D32;
+            --verde-claro: #66BB6A;
+            --verde-muy-claro: #E8F5E9;
+            --marron-tierra: #8D6E63;
+            --beige: #F5F5DC;
+            --blanco: #FFFFFF;
+            --gris-oscuro: #424242;
+            --amarillo-suave: #FBC02D;
+            --font: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: var(--gris-oscuro);
+            font-family: var(--font);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ---------- CONTENEDOR PRINCIPAL ---------- */
+        .presentation-wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: 100%;
+            max-height: 100%;
+            background: var(--beige);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+        }
+
+        /* ---------- SPLASH ---------- */
+        .splash {
+            position: absolute;
+            inset: 0;
+            z-index: 9999;
+            background: var(--beige);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+            pointer-events: auto;
+        }
+        .splash.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .splash-logo {
+            width: 16%;
+            min-width: 120px;
+            max-width: 280px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 2rem;
+            animation: fadeUp 0.8s ease;
+        }
+        .splash-btn {
+            background: var(--verde-principal);
+            color: var(--blanco);
+            border: none;
+            border-radius: 60px;
+            padding: 18px 48px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            cursor: pointer;
+            transition: background 0.2s;
+            animation: pulse 1.8s infinite;
+            letter-spacing: 1px;
+        }
+        .splash-btn:hover { background: #1B5E20; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px) scale(0.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ---------- BOTÓN CERRAR ---------- */
+        .close-btn {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            z-index: 8000;
+            background: var(--verde-principal);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            padding: 8px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+        }
+        .close-btn:hover { background: #1B5E20; }
+
+        /* ---------- BARRA DE PROGRESO ---------- */
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 6px;
+            width: 100%;
+            background: rgba(0,0,0,0.08);
+            z-index: 7000;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--verde-principal);
+            transition: width 0.3s ease;
+        }
+
+        /* ---------- SWIPER ---------- */
+        .swiper {
+            width: 100%;
+            height: 100%;
+            background: var(--beige);
+        }
+        .swiper-slide {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 80px 50px 70px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--beige);
+            scroll-behavior: smooth;
+        }
+        .swiper-slide:nth-child(odd) { background: var(--beige); }
+        .swiper-slide:nth-child(even) { background: var(--verde-muy-claro); }
+        .swiper-slide:nth-child(3n) { background: var(--blanco); }
+
+        /* tipografía */
+        .swiper-slide h1 {
+            color: var(--verde-principal);
+            font-size: 2.6rem;
+            border-bottom: 4px solid var(--amarillo-suave);
+            display: inline-block;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+        .swiper-slide h2 {
+            color: var(--marron-tierra);
+            font-size: 2rem;
+            margin: 15px 0 10px;
+        }
+        .swiper-slide h3 {
+            color: var(--verde-principal);
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+        .swiper-slide p, .swiper-slide li {
+            color: var(--gris-oscuro);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .swiper-slide ul, .swiper-slide ol {
+            margin-left: 2rem;
+            margin-top: 12px;
+        }
+        .swiper-slide li { margin-bottom: 8px; }
+        .highlight-box {
+            background: var(--amarillo-suave);
+            padding: 20px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin: 18px 0;
+            color: var(--gris-oscuro);
+        }
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .card {
+            flex: 1 1 200px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-top: 6px solid var(--verde-claro);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            perspective: 1000px;
+            min-height: 200px;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: relative;
+            width: 100%;
+            backface-visibility: hidden;
+        }
+        .card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .card.flipped .card-front {
+            display: none;
+        }
+        .card.flipped .card-back {
+            display: flex;
+        }
+        .card h3 { color: var(--marron-tierra); }
+        .card p { font-size: 1rem; }
+        .card small { color: var(--gris-oscuro); opacity: 0.7; }
+        .profesor {
+            margin-top: auto;
+            font-style: italic;
+            color: var(--marron-tierra);
+            font-size: 1.2rem;
+        }
+        .col-2 {
+            column-count: 2;
+            column-gap: 30px;
+        }
+        @media (max-width: 700px) {
+            .swiper-slide { padding: 70px 20px 80px 20px; }
+            .swiper-slide h1 { font-size: 2rem; }
+            .swiper-slide h2 { font-size: 1.6rem; }
+            .col-2 { column-count: 1; }
+            .card { flex: 1 1 100%; }
+            .splash-logo { width: 38%; min-width: 100px; }
+            .splash-btn { font-size: 1.4rem; padding: 14px 32px; }
+        }
+
+        /* ---------- NAVEGACIÓN INFERIOR ---------- */
+        .nav-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            z-index: 6000;
+            pointer-events: none;
+        }
+        .nav-bar > * {
+            pointer-events: auto;
+        }
+        .nav-btn {
+            background: var(--verde-principal);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: background 0.2s;
+        }
+        .nav-btn:hover { background: #1B5E20; }
+        .nav-btn.hidden-btn {
+            opacity: 0;
+            pointer-events: none;
+            cursor: default;
+        }
+        .nav-counter {
+            background: rgba(255,255,255,0.85);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: var(--gris-oscuro);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* ---------- LIGHTBOX ---------- */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            backdrop-filter: blur(6px);
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 2.8rem;
+            font-weight: 300;
+            cursor: pointer;
+            background: rgba(0,0,0,0.3);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.15); }
+
+        /* ---------- AUTOEVALUACIÓN (3 preguntas de selección única) ---------- */
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            max-width: 700px;
+            margin: 20px auto;
+        }
+        .quiz-question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .quiz-question:last-child {
+            border-bottom: none;
+        }
+        .quiz-question p {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .quiz-options label {
+            display: block;
+            margin: 6px 0;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .quiz-options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .quiz-result {
+            margin-top: 25px;
+            padding: 20px;
+            background: var(--verde-muy-claro);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: none;
+        }
+        .quiz-result.show {
+            display: block;
+            animation: fadeUp 0.5s ease;
+        }
+        .quiz-btn {
+            background: var(--verde-principal);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 32px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 15px;
+        }
+        .quiz-btn:hover { background: #1B5E20; }
+
+        /* ---------- IMAGEN CLICKEABLE ---------- */
+        .clickable-img {
+            cursor: pointer;
+            border-radius: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            max-width: 100%;
+            height: auto;
+        }
+        .clickable-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        /* ---------- UTILITY ---------- */
+        .hidden { display: none; }
+        .text-center { text-align: center; }
+        .mt-20 { margin-top: 20px; }
+        .mb-20 { margin-bottom: 20px; }
+        .bg-verde-claro { background: var(--verde-muy-claro); }
+    </style>
+</head>
+<body>
+
+<div class="presentation-wrapper" id="app">
+    <!-- SPLASH -->
+    <div class="splash" id="splash">
+        <img class="splash-logo" src="https://www.dropbox.com/scl/fi/7qb3a3zc0qcst825vgmn3/LOGO_fondo.png?rlkey=p824fvkqusvkfkz7faj1hl73e&st=ruww9xow&dl=1" alt="Sur en Acción">
+        <button class="splash-btn" id="startBtn">👁 VER</button>
+    </div>
+
+    <!-- BOTÓN CERRAR -->
+    <button class="close-btn" id="closeBtn">✕ Cerrar</button>
+
+    <!-- BARRA DE PROGRESO -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- SWIPER -->
+    <div class="swiper" id="swiperContainer">
+        <div class="swiper-wrapper">
+            <!-- SLIDE 1: Portada -->
+            <div class="swiper-slide">
+                <h1>Unidad 3</h1>
+                <h2>Ganadería sostenible</h2>
+                <div class="highlight-box">
+                    La ganadería puede ser una actividad que cuida el ambiente. Veremos cómo integrar árboles en nuestros potreros y mantener nuestros animales sanos.
+                </div>
+            </div>
+
+            <!-- SLIDE 2: Tema 1 - Ganadería sostenible -->
+            <div class="swiper-slide">
+                <h2>Tema 1: Ganadería sostenible</h2>
+                <p>La ganadería sostenible busca producir leche y carne de manera rentable sin dañar el medio ambiente. Implica:</p>
+                <div class="card-grid">
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>🌾 Manejo racional de pastos</h3>
+                                <p>Rotar el ganado en potreros pequeños para darle tiempo al pasto de recuperarse.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>🌾 Manejo racional de pastos</h3>
+                                <p>Así se evita la sobrecarga y se mejora la calidad del forraje. La rotación permite que el pasto crezca fuerte y nutritivo, aumentando la producción de leche y carne.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>💧 Abastecimiento de agua</h3>
+                                <p>Asegurar que el ganado tenga agua limpia y fresca en todo momento.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>💧 Abastecimiento de agua</h3>
+                                <p>Protege las fuentes de agua con cercas y vegetación nativa. El agua de calidad es esencial para la producción y salud animal.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: Tema 2 - Agroforestería -->
+            <div class="swiper-slide">
+                <h2>Tema 2: Integración con agroforestería</h2>
+                <p>Los Sistemas Silvopastoriles son potreros con árboles que proporcionan sombra, forraje y madera.</p>
+                <div class="card-grid">
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>🌳 Diseño</h3>
+                                <p>Siembra árboles maderables y de sombra en tu potrero.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>🌳 Diseño</h3>
+                                <p>Especies: cedro, madero negro, laurel negro, madreado, cedro real, guácimo. Deja distancia amplia entre árboles para que no interfieran con el pasto.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>✅ Beneficios</h3>
+                                <p>Sombra, forraje, madera, conservación del agua y biodiversidad.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>✅ Beneficios</h3>
+                                <p>Reducen estrés calórico del ganado, mejoran productividad. Hojas de algunos árboles sirven como suplemento alimenticio en épocas secas. Ayudan a conservar el agua y la biodiversidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Imagen clickeable -->
+                <div style="margin-top: 20px; text-align: center;">
+                    <img class="clickable-img" src="https://www.dropbox.com/scl/fi/7qb3a3zc0qcst825vgmn3/LOGO_fondo.png?rlkey=p824fvkqusvkfkz7faj1hl73e&st=ruww9xow&dl=1" alt="Sistema silvopastoril" style="max-width: 250px; border-radius: 12px;">
+                    <p style="font-size: 0.9rem; color: var(--marron-tierra);">👆 Haz clic para ampliar</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: Tema 3 - Sanidad animal -->
+            <div class="swiper-slide">
+                <h2>Tema 3: Sanidad animal básica</h2>
+                <p>Un animal sano es un animal productivo. La sanidad animal es la base para evitar pérdidas económicas.</p>
+                <div class="card-grid">
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>💉 Vacunación</h3>
+                                <p>Cumple con el calendario nacional de vacunación obligatoria.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>💉 Vacunación</h3>
+                                <p>En Honduras: fiebre aftosa (2 veces/año) y rabia paralítica (1 vez/año), transmitida por murciélagos. Fundamental para prevenir pérdidas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>🪱 Desparasitación</h3>
+                                <p>Parásitos internos y externos debilitan al animal.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>🪱 Desparasitación</h3>
+                                <p>Interna: ivermectina o albendazol cada 4 meses. Externa: baños garrapaticidas cada 15 días en lluvia. Alternativa natural: caldo sulfocalcico o plantar higuerillo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: Enfermedades comunes -->
+            <div class="swiper-slide">
+                <h2>Prevención de enfermedades comunes</h2>
+                <div class="card-grid">
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>🐄 Mastitis</h3>
+                                <p>Inflamación de la ubre.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>🐄 Mastitis</h3>
+                                <p>Mantén limpio el lugar de ordeño. Lava la ubre con agua y jabón antes y después. Usa ordeño completo y sella pezones con yodo diluido.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>💨 Timpanismo</h3>
+                                <p>Hinchazón por gases.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>💨 Timpanismo</h3>
+                                <p>Evita que el ganado coma pasto muy tierno o leguminosas húmedas. Proporciona heno o zacate seco antes de soltarlos a potreros con forraje verde.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>🕷️ Parasitosis externas</h3>
+                                <p>Garrapatas y moscas.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>🕷️ Parasitosis externas</h3>
+                                <p>Inspecciones visuales periódicas. Aplica baños garrapaticidas y aísla a los animales más afectados.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: Plan de observación y registro -->
+            <div class="swiper-slide">
+                <h2>Plan de observación y registro</h2>
+                <div class="card-grid">
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>👁️ Observación diaria</h3>
+                                <p>15 minutos diarios para observar tu ganado.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>👁️ Observación diaria</h3>
+                                <p>Identifica signos de enfermedad: falta de apetito, apatía, cojeras, tos, secreción nasal, diarrea o cambios en producción de leche. Atender a tiempo evita complicaciones. Evita y cura heridas para prevenir el gusano barrenador.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h3>📋 Registro sanitario</h3>
+                                <p>Lleva un cuaderno o libreta.</p>
+                                <p><small>👆 Haz clic para más info</small></p>
+                            </div>
+                            <div class="card-back">
+                                <h3>📋 Registro sanitario</h3>
+                                <p>Anota fechas de vacunación, desparasitación, partos y enfermedades. Esto te ayudará a planificar mejor el manejo del hato.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: AUTOEVALUACIÓN (3 preguntas de selección única) -->
+            <div class="swiper-slide">
+                <h2>📝 Autoevaluación</h2>
+                <p>Responde las siguientes preguntas para poner a prueba tus conocimientos sobre ganadería sostenible.</p>
+                <div class="quiz-container" id="quizContainer">
+                    <div class="quiz-question" data-correct="a">
+                        <p>1. ¿Qué busca la ganadería sostenible?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q1" value="a"> a) Producir sin dañar el ambiente</label>
+                            <label><input type="radio" name="q1" value="b"> b) Producir solo carne</label>
+                            <label><input type="radio" name="q1" value="c"> c) Eliminar los árboles</label>
+                        </div>
+                    </div>
+                    <div class="quiz-question" data-correct="b">
+                        <p>2. ¿Cada cuánto se debe desparasitar internamente al ganado?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q2" value="a"> a) Cada 2 meses</label>
+                            <label><input type="radio" name="q2" value="b"> b) Cada 4 meses</label>
+                            <label><input type="radio" name="q2" value="c"> c) Cada 6 meses</label>
+                        </div>
+                    </div>
+                    <div class="quiz-question" data-correct="a">
+                        <p>3. ¿Qué enfermedad se previene manteniendo limpio el lugar de ordeño?</p>
+                        <div class="quiz-options">
+                            <label><input type="radio" name="q3" value="a"> a) Mastitis</label>
+                            <label><input type="radio" name="q3" value="b"> b) Timpanismo</label>
+                            <label><input type="radio" name="q3" value="c"> c) Rabia</label>
+                        </div>
+                    </div>
+                    <button class="quiz-btn" id="quizBtn">✅ Ver calificación</button>
+                    <div class="quiz-result" id="quizResult">
+                        <span id="quizScore"></span>
+                    </div>
+                    <div class="quiz-result" id="quizRecovery" style="background: var(--amarillo-suave); margin-top: 10px;">
+                        <span id="recoveryMessage"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
+    <div class="nav-bar" id="navBar">
+        <button class="nav-btn" id="prevBtn">◀ Anterior</button>
+        <span class="nav-counter" id="slideCounter">1 / 7</span>
+        <button class="nav-btn" id="nextBtn">Siguiente ▶</button>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">✕</span>
+        <img id="lightboxImg" src="" alt="ampliación">
+    </div>
+</div>
+
+<script>
+    (function(){
+        "use strict";
+
+        // ---------- ELEMENTOS ----------
+        const splash = document.getElementById('splash');
+        const startBtn = document.getElementById('startBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const progressFill = document.getElementById('progressFill');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const slideCounter = document.getElementById('slideCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // ---------- MÚSICA ----------
+        const bgm = new Audio('https://www.dropbox.com/scl/fi/49a75ks3r82xxa0r6oqj1/musica-fondo.mp3?rlkey=1ag90k1gtwxhm6svit2qr6g75&st=muz7h655&dl=1');
+        bgm.loop = true;
+        bgm.volume = 0.35;
+        bgm.preload = 'auto';
+
+        // ---------- DEVICE DETECTOR ----------
+        const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const isIPhone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        // ---------- SWIPER ----------
+        let swiper = null;
+        let totalSlides = 7;
+
+        function updateProgress(activeIndex, total) {
+            const pct = ((activeIndex + 1) / total) * 100;
+            progressFill.style.width = pct + '%';
+            slideCounter.textContent = (activeIndex + 1) + ' / ' + total;
+            
+            // Ocultar/mostrar botones según posición
+            if (activeIndex === 0) {
+                prevBtn.classList.add('hidden-btn');
+            } else {
+                prevBtn.classList.remove('hidden-btn');
+            }
+            
+            if (activeIndex === total - 1) {
+                nextBtn.classList.add('hidden-btn');
+            } else {
+                nextBtn.classList.remove('hidden-btn');
+            }
+        }
+
+        function initSwiper() {
+            if (swiper) swiper.destroy(true, true);
+            swiper = new Swiper('.swiper', {
+                direction: 'horizontal',
+                loop: false,
+                keyboard: { enabled: true },
+                mousewheel: { forceToAxis: true },
+                pagination: false,
+                navigation: false,
+                on: {
+                    slideChange: function() {
+                        updateProgress(this.activeIndex, this.slides.length);
+                    },
+                    init: function() {
+                        totalSlides = this.slides.length;
+                        updateProgress(0, totalSlides);
+                    }
+                }
+            });
+            prevBtn.onclick = () => swiper && swiper.slidePrev();
+            nextBtn.onclick = () => swiper && swiper.slideNext();
+        }
+
+        // ---------- LIGHTBOX ----------
+        function setupLightbox() {
+            document.querySelectorAll('.clickable-img').forEach(img => {
+                img.style.cursor = 'pointer';
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    lightboxImg.src = this.src;
+                    lightbox.classList.add('active');
+                });
+            });
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLightbox();
+            });
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightboxImg.src = '';
+        }
+
+        // ---------- FLIP CARDS ----------
+        window.flipCard = function(card) {
+            card.classList.toggle('flipped');
+        };
+
+        // ---------- FULLSCREEN ----------
+        function requestFS() {
+            if (isIPhone) return;
+            try {
+                const el = document.documentElement;
+                if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+                else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+                else if (el.msRequestFullscreen) el.msRequestFullscreen();
+            } catch(e) {}
+        }
+        function exitFS() {
+            try {
+                if (document.fullscreenElement) document.exitFullscreen();
+                else if (document.webkitFullscreenElement) document.webkitExitFullscreen();
+                else if (document.msFullscreenElement) document.msExitFullscreen();
+            } catch(e) {}
+        }
+
+        // ---------- AUTOEVALUACIÓN (3 preguntas de selección única) ----------
+        function setupQuiz() {
+            const quizBtn = document.getElementById('quizBtn');
+            const quizResult = document.getElementById('quizResult');
+            const quizRecovery = document.getElementById('quizRecovery');
+            const quizScore = document.getElementById('quizScore');
+            const recoveryMessage = document.getElementById('recoveryMessage');
+
+            quizBtn.addEventListener('click', function() {
+                let correct = 0;
+                let total = 0;
+                const questions = document.querySelectorAll('.quiz-question');
+
+                questions.forEach(q => {
+                    const correctAnswer = q.dataset.correct;
+                    const selected = q.querySelector('input[type="radio"]:checked');
+                    
+                    if (!selected) return;
+
+                    total++;
+                    if (selected.value === correctAnswer) {
+                        correct++;
+                    }
+                });
+
+                if (total === 0) {
+                    quizResult.classList.add('show');
+                    quizScore.textContent = '❌ Por favor responde todas las preguntas.';
+                    quizRecovery.classList.remove('show');
+                    return;
+                }
+
+                const percentage = Math.round((correct / total) * 100);
+                let grade = '';
+                let recovery = '';
+                if (percentage >= 70) {
+                    grade = '✅ ¡Aprobado!';
+                    recovery = '🎉 Excelente trabajo. Recuerda aplicar estos conocimientos en tu finca.';
+                } else {
+                    grade = '📚 Necesitas repasar.';
+                    recovery = '🔄 Te recomendamos revisar nuevamente los temas de ganadería sostenible, sistemas silvopastoriles y sanidad animal. ¡Tú puedes!';
+                }
+
+                quizResult.classList.add('show');
+                quizScore.textContent = `${grade} (${percentage}%) - ${correct} de ${total} correctas.`;
+                
+                quizRecovery.classList.add('show');
+                recoveryMessage.textContent = recovery;
+            });
+        }
+
+        // ---------- INICIO ----------
+        function startPresentation() {
+            bgm.play().catch(() => {});
+            if (!isIPhone) requestFS();
+            splash.classList.add('hidden');
+            closeBtn.style.display = 'block';
+
+            if (!swiper) {
+                initSwiper();
+                setupLightbox();
+                setupQuiz();
+            } else {
+                swiper.update();
+            }
+            if (swiper) updateProgress(swiper.activeIndex, swiper.slides.length);
+        }
+
+        // ---------- CERRAR ----------
+        function closePresentation() {
+            exitFS();
+            bgm.pause();
+            bgm.currentTime = 0;
+            closeBtn.style.display = 'none';
+            splash.classList.remove('hidden');
+            if (swiper) {
+                swiper.slideTo(0, 0);
+                updateProgress(0, swiper.slides.length);
+            }
+            closeLightbox();
+        }
+
+        // ---------- EVENTOS ----------
+        startBtn.addEventListener('click', startPresentation);
+        closeBtn.addEventListener('click', closePresentation);
+
+        console.log('🌱 Unidad 3 · Ganadería Sostenible');
+        console.log('📱 Dispositivo:', isMobile ? (isIPhone ? 'iPhone' : 'Android/Mobile') : 'Desktop');
+    })();
+</script>
+</body>
+</html>
